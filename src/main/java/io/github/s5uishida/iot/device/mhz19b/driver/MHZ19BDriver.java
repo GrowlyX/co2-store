@@ -17,7 +17,7 @@ import com.fazecast.jSerialComm.SerialPort;
  *
  */
 public class MHZ19BDriver {
-    public static final Logger LOG = LoggerFactory.getLogger(MHZ19BDriver.class);
+    public static final Logger LOG = LoggerFactory.getLogger("CO2Record");
 
     private static final int DEFAULT_TIMEOUT = 1000; // default read timeout (msec)
 
