@@ -1,0 +1,17 @@
+[Unit]
+Description=CO2 Monitor
+After=mongod.service
+
+[Service]
+SuccessExitStatus=143
+WorkingDirectory=/opt/co2-monitor/
+ExecStart=/root/.sdkman/candidates/java/17.0.0-tem/bin/java -Xms128m -Xmx1024m -jar co2-monitor.jar
+ExecStop=/bin/kill -15 $MAINPID
+
+User=root
+
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
