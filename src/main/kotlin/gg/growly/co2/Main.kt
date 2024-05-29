@@ -6,8 +6,6 @@ import kotlinx.serialization.json.Json
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.getCollection
 import java.io.File
-import java.io.FileOutputStream
-import java.io.PrintStream
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.Executors
@@ -19,12 +17,6 @@ import java.util.concurrent.TimeUnit
  */
 fun main()
 {
-    val logsDirectory = File("logs")
-    if (!logsDirectory.exists())
-    {
-        logsDirectory.mkdirs()
-    }
-
     val dataBackupDirectory = File("data-backup")
     if (!dataBackupDirectory.exists())
     {
@@ -33,15 +25,6 @@ fun main()
 
     val currentInstanceDB = File(dataBackupDirectory, "${Date()}")
     currentInstanceDB.mkdirs()
-
-    val out = PrintStream(
-        FileOutputStream(
-            File(logsDirectory, "console-${Date()}.log"),
-            true
-        ),
-        true
-    )
-    System.setOut(out)
 
     val client = KMongo.createClient()
     val database = client.getDatabase("APStatistics")
@@ -61,7 +44,7 @@ fun main()
     val minutesLeftUntilNextHour = 60 - currentMinute
     val minutesLeftUntilNext10M = minutesLeftUntilNextHour % 10
 
-    println("${minutesLeftUntilNext10M - 1}m${secondsLeftUntilNextMinute}s left until next 10M mark")
+    MHZ19BDriver.LOG.info("${minutesLeftUntilNext10M - 1}m${secondsLeftUntilNextMinute}s left until next 10M mark")
     val totalSecondsToWait = (minutesLeftUntilNext10M - 1) * 60L + secondsLeftUntilNextMinute
     val totalMilliseconds = totalSecondsToWait * 1000L
 
@@ -100,7 +83,7 @@ fun main()
 
     Runtime.getRuntime().addShutdownHook(Thread {
         co2Sensor.close()
-        println("Closed the CO2 sensor instance")
+        MHZ19BDriver.LOG.info("Closed the CO2 sensor instance")
     })
 
     while (true)

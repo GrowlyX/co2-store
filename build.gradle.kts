@@ -21,8 +21,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0-RC")
     implementation("com.fazecast:jSerialComm:[2.0.0,3.0.0)")
     implementation("org.litote.kmongo:kmongo-serialization:4.11.0")
-    implementation("org.slf4j:slf4j-api:2.0.13")
-    implementation("org.slf4j:slf4j-simple:2.0.13")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
 tasks.test {
