@@ -19,8 +19,10 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0-RC")
+    implementation("de.brudaswen.kotlinx.serialization:kotlinx-serialization-csv:2.0.0")
     implementation("com.fazecast:jSerialComm:[2.0.0,3.0.0)")
     implementation("org.litote.kmongo:kmongo-serialization:4.11.0")
+    implementation("org.knowm.xchart:xchart:3.8.0")
     implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
